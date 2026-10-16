@@ -33,4 +33,35 @@ public class CPUscheduling {
         return display(p);
 
     }
+
+    public static double SJF(Process[] processes){
+        int currentTime = 0;
+        int completed=0;
+        boolean[] done = new boolean[processes.length];
+
+        System.out.print("\nSJF Order:");
+
+        while(completed < processes.length){
+            int shortest = -1;
+
+            for(int i=0; i<processes.length; i++){
+                if(!done[i] && processes[i].arrivalTime <= currentTime){
+                    if(shortest == -1 || processes[i].burstTime < processes[shortest].burstTime){
+                        shortest = i;
+                    }
+                }
+            }
+            if(shortest == -1){
+                currentTime++;
+                continue;
+            }
+            currentTime += processes[shortest].burstTime;
+            processes[shortest].completionTime = currentTime;
+            done[shortest] = true;
+            completed++;
+            System.out.print("P" + processes[shortest].id + " ");
+        }
+        return display(processes);
+    }
+
 }
