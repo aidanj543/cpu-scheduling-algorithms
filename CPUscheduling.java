@@ -1,3 +1,5 @@
+import java.util.*;
+
 class Process {
     int id;
     int arrivalTime;
@@ -13,12 +15,22 @@ class Process {
 }
 
 public class CPUscheduling {
-    public static void main(String[] args){
-        Process [] processes = {
-            new Process(1, 0, 8),
-            new Process(2, 1, 4),
-            new Process(3, 2, 9),
-            new Process(4, 3, 5)
-        };
+
+    public static double FIFO(Process[] processes){ //FIFO
+        Process []p = processes.clone();
+        Arrays.sort(p, Comparator.comparingInt(a->a.arrivalTime));
+
+        int currentTime = 0;
+        System.out.print("\nFIFO Order:");
+
+        for(Process process : p){
+            currentTime = Math.max(currentTime, process.arrivalTime);
+            currentTime += process.burstTime;
+            process.completionTime = currentTime;
+            System.out.print("P" + process.id + " ");
+        }
+
+        return display(p);
+
     }
 }
