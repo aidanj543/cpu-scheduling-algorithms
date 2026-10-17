@@ -138,7 +138,7 @@ public class CPUscheduling {
         System.out.println("SRT Average Turnaround Time: " + srt);
 
         double lower = Math.min(fifo, Math.min(sjf, srt));
-        System.out.printf("Lowest Average Turnaround Time:", lower);
+        System.out.printf("Lowest Average Turnaround Time: %.2f%n", lower);
     }
 
 
