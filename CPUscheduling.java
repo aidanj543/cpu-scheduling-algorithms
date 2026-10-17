@@ -64,4 +64,52 @@ public class CPUscheduling {
         return display(processes);
     }
 
+    public static double SRT(Process[] processes){
+        int n = processes.length;
+        int[] remainingTime = new int[n];
+
+        for (int i=0; i<n; i++){
+            remainingTime[i] = processes[i].burstTime;
+        }
+
+        int completed = 0;
+        int currentTime = 0;
+        int previous = -1;
+
+        System.out.print("\nSRT Order:");
+
+        while(completed < n){
+            int shortest = -1;
+
+            for(int i=0; i<n; i++){
+                if(processes[i].arrivalTime <= currentTime && remainingTime[i] > 0){
+                    if(shortest == -1 || remainingTime[i] < remainingTime[shortest]){
+                        shortest = i;
+                    }
+                }
+            }
+
+            if(shortest == -1){
+                currentTime++;
+                previous = -1;
+                continue;
+            }
+
+            if(previous != shortest){
+                System.out.print("P" + processes[shortest].id + " ");
+                previous = shortest;
+            }
+
+            remainingTime[shortest]--;
+            currentTime++;
+
+            if(remainingTime[shortest] == 0){
+                processes[shortest].completionTime = currentTime;
+                completed++;
+            }
+        }
+
+        return display(processes);
+    }
+
 }
