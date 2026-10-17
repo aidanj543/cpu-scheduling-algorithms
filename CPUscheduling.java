@@ -112,4 +112,31 @@ public class CPUscheduling {
         return display(processes);
     }
 
+    public static double display(Process[] processes){
+        double total = 0;
+
+        System.out.println("\nProcess\tArrival\tBurst\tCompletion\tTurnaround");
+
+        for (Process process : processes){
+            process.turnaroundTime = process.completionTime - process.arrivalTime;
+            total += process.turnaroundTime;
+            System.out.println("P" + process.id + "\t" + process.arrivalTime + "\t" + process.burstTime + "\t" + process.completionTime + "\t\t" + process.turnaroundTime);
+        }
+        System.out.println("Average Turnaround Time: " + (total / processes.length));
+        return total / processes.length;
+
+    }
+
+
+    public static void main(String[] args){
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter number of processes: ");
+        int n = scanner.nextInt();
+
+        if (n <= 0) {
+            System.out.println("Invalid Input. Processes must be greater than 0.");
+            return;
+        }
+    }
+
 }
