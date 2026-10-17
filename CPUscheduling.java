@@ -139,7 +139,6 @@ public class CPUscheduling {
 
         double lower = Math.min(fifo, Math.min(sjf, srt));
         System.out.printf("Lowest Average Turnaround Time:", lower);
-        
     }
 
 
@@ -156,7 +155,6 @@ public class CPUscheduling {
 
         System.out.println("-------Assignment Dataset-------");
         run(processes);
-
     }
 
 }
