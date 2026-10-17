@@ -127,6 +127,21 @@ public class CPUscheduling {
 
     }
 
+    public static void run(Process[] processes){
+        double fifo = FIFO(processes);
+        double sjf = SJF(processes);
+        double srt = SRT(processes);
+
+        System.out.println("\n----Algorithm Comparison----");
+        System.out.println("FIFO Average Turnaround Time: " + fifo);
+        System.out.println("SJF Average Turnaround Time: " + sjf);
+        System.out.println("SRT Average Turnaround Time: " + srt);
+
+        double lower = Math.min(fifo, Math.min(sjf, srt));
+        System.out.printf("Lowest Average Turnaround Time:", lower);
+        
+    }
+
 
     public static void main(String[] args){
         Scanner scanner = new Scanner(System.in);
