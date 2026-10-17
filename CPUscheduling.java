@@ -155,6 +155,39 @@ public class CPUscheduling {
 
         System.out.println("-------Assignment Dataset-------");
         run(processes);
+
+
+
+        System.out.println("---------Custom Dataset---------");
+        System.out.println("Enter number of processes: ");
+        int n = scanner.nextInt();
+        
+
+        if (n<=0){
+            System.out.println("Invalid number of processes.");
+        }
+
+        Process[] customSet = new Process[n];
+
+        for(int i=0; i<n; i++){
+            System.out.print("P"+ (i+1)+ " Arrival time: ");
+            int arrivalTime = scanner.nextInt();
+
+            System.out.print("P"+ (i+1)+ " Burst time: ");
+            int burstTime = scanner.nextInt();
+
+            if (arrivalTime<0 || burstTime <= 0){
+                System.out.println("Invalid Process Times.");
+                return;
+            }
+
+            customSet[i] = new Process(i+1, arrivalTime, burstTime);
+        }
+
+        System.out.println("-------Custom Set Results---------");
+        run(customSet);
     }
+
+    
 
 }
