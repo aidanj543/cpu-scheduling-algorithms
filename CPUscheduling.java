@@ -112,4 +112,49 @@ public class CPUscheduling {
         return display(processes);
     }
 
+    public static double display(Process[] processes){
+        double total = 0;
+
+        System.out.println("\nProcess\tArrival\tBurst\tCompletion\tTurnaround");
+
+        for (Process process : processes){
+            process.turnaroundTime = process.completionTime - process.arrivalTime;
+            total += process.turnaroundTime;
+            System.out.println("P" + process.id + "\t" + process.arrivalTime + "\t" + process.burstTime + "\t" + process.completionTime + "\t\t" + process.turnaroundTime);
+        }
+        System.out.println("Average Turnaround Time: " + (total / processes.length));
+        return total / processes.length;
+
+    }
+
+    public static void run(Process[] processes){
+        double fifo = FIFO(processes);
+        double sjf = SJF(processes);
+        double srt = SRT(processes);
+
+        System.out.println("\n----Algorithm Comparison----");
+        System.out.println("FIFO Average Turnaround Time: " + fifo);
+        System.out.println("SJF Average Turnaround Time: " + sjf);
+        System.out.println("SRT Average Turnaround Time: " + srt);
+
+        double lower = Math.min(fifo, Math.min(sjf, srt));
+        System.out.printf("Lowest Average Turnaround Time: %.2f%n", lower);
+    }
+
+
+    public static void main(String[] args){
+        Scanner scanner = new Scanner(System.in);
+
+
+        Process[] processes = {
+            new Process(1,0,8),
+            new Process(2,1,4),
+            new Process(3,2,9),
+            new Process(4,3,5)
+        };
+
+        System.out.println("-------Assignment Dataset-------");
+        run(processes);
+    }
+
 }
